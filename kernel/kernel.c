@@ -1,6 +1,6 @@
 #include <kernel/monitor.h>
 
-int main()
+int main(struct multiboot *mboot_ptr)
 {
     monitor_clear();
 

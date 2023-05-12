@@ -16,7 +16,7 @@ all: multiboot buildgrub run
 
 %.o: %.s
 	$(info [asm] $@)
-	as --32 -felf $< -o $@
+	nasm -f elf32 $< -o $@
 
 %.o: %.c ${HEADERS}
 	$(info [c] $@)
@@ -36,14 +36,14 @@ buildgrub: LumaOS.bin
 
 run:
 	@echo "[Makefile]: Running the ISO"
-	qemu-system-i386 -cdrom bin/${OUTPUT_ISO}
+	qemu-system-i386 -cdrom ${OUTPUT_ISO} -display gtk -serial mon:stdio
 
 ${OUTPUT_ISO}:
 	$(info [all] writing $@)
 	@grub-mkrescue -o ${OUTPUT_ISO} bin
 
 qemu: ${OUTPUT_ISO}
-	qemu-system-i386 -cdrom ${OUTPUT_ISO} -monitor stdio -s -no-reboot
+	qemu-system-x86_64 -cdrom ${OUTPUT_ISO}
 
 clean:
 	rm kernel/*.o
