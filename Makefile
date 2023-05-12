@@ -1,6 +1,6 @@
 ASM_FILES = $(wildcard boot/*.s)
-C_SOURCES = $(wildcard kernel/*.c)
-HEADERS = $(wildcard include/kernel/*.h)
+C_SOURCES = $(wildcard kernel/*.c libc/*.c)
+HEADERS = $(wildcard include/*.h include/kernel/*.h)
 
 C_OBJ_FILES = ${C_SOURCES:.c=.o}
 ASM_OBJ_FILES = ${ASM_FILES:.s=.o}
